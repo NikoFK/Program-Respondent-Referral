@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Referral Program by Niko</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+  :root {
+    --cw-black: #000000;
+    --cw-dark: #0a0a0a;
+    --cw-gray-900: #111111;
+    --cw-gray-800: #1c1c1c;
+    --cw-gray-700: #2d2d2d;
+    --cw-gray-600: #494949;
+    --cw-gray-500: #6b7280;
+    --cw-gray-400: #9ca3af;
+    --cw-gray-300: #d1d5db;
+    --cw-white: #ffffff;
+    --cw-lime: #a3e635;
+    --cw-lime-dark: #84cc16;
+    --cw-lime-glow: rgba(163, 230, 53, 0.35);
+    --cw-orange: #EC8D09;
+    --cw-orange-glow: rgba(236, 141, 9, 0.35);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.3);
+    --shadow-lg: 0 10px 40px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+    --shadow-lime: 0 8px 30px rgba(163,230,53,0.25);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cw-black);
+    color: var(--cw-gray-300);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(163,230,53,0.15);
+    padding: 0 1.5rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: .3rem;
+    font-weight: 900; font-size: 1.1rem;
+    color: var(--cw-white); letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--cw-lime); }
+  .nav-logo .nav-dot {
+    width: 8px; height: 8px; background: var(--cw-lime); border-radius: 2px;
+    display: inline-block; margin-left: 2px;
+  }
+  .nav-right { display: flex; align-items: center; gap: .6rem; }
+  .btn-poster {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: linear-gradient(135deg, var(--cw-lime), var(--cw-lime-dark));
+    color: var(--cw-black); font-size: .78rem; font-weight: 800;
+    padding: .45rem 1rem; border-radius: 50px;
+    text-decoration: none; letter-spacing: .01em;
+    box-shadow: 0 2px 10px var(--cw-lime-glow);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-poster:hover { transform: translateY(-1px); box-shadow: 0 4px 18px var(--cw-lime-glow); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    padding: 90px 1.5rem 60px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image: url('Banner.jpg');
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.7));
+  }
+  .hero-blob {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); opacity: .25; pointer-events: none;
+  }
+  .hero-blob-1 { width: 500px; height: 500px; background: rgba(34,197,94,0.3); top: -100px; left: -150px; }
+  .hero-blob-2 { width: 400px; height: 400px; background: rgba(59,130,246,0.25); bottom: -80px; right: -100px; }
+  .hero-blob-3 { width: 300px; height: 300px; background: rgba(20,184,166,0.2); top: 40%; left: 50%; transform: translate(-50%,-50%); }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: rgba(163,230,53,0.15);
+    border: 1px solid rgba(163,230,53,0.35);
+    color: var(--cw-lime); font-size: .78rem; font-weight: 800;
+    padding: .38rem .9rem; border-radius: 50px; margin-bottom: 1.4rem;
+    letter-spacing: .04em; text-transform: uppercase;
+    position: relative; z-index: 1;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .hero h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    line-height: 1.1; font-weight: 900;
+    color: #ffffff; position: relative; z-index: 1;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+    letter-spacing: -0.03em;
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--cw-lime) 0%, var(--cw-orange) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-sub {
+    font-size: clamp(.95rem, 2.5vw, 1.15rem);
+    color: rgba(255,255,255,0.85); max-width: 520px; margin: 0 auto 2rem;
+    position: relative; z-index: 1;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    font-weight: 500;
+  }
+  .hero-buttons { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; position: relative; z-index: 1; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: linear-gradient(135deg, var(--cw-lime), var(--cw-lime-dark));
+    color: var(--cw-black); font-weight: 800; font-size: 1rem;
+    padding: .85rem 1.8rem; border-radius: 50px;
+    text-decoration: none; box-shadow: var(--shadow-lime);
+    transition: transform .2s, box-shadow .2s; border: none; cursor: pointer;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px var(--cw-lime-glow); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: transparent; color: var(--cw-white); font-weight: 700; font-size: 1rem;
+    padding: .85rem 1.8rem; border-radius: 50px; border: 2px solid rgba(255,255,255,0.35);
+    text-decoration: none; box-shadow: var(--shadow-sm);
+    transition: transform .2s, box-shadow .2s, border-color .2s, background .2s; cursor: pointer;
+  }
+  .btn-secondary:hover { transform: translateY(-2px); border-color: var(--cw-lime); background: rgba(163,230,53,0.08); }
+
+  .hero-stats {
+    display: flex; flex-wrap: wrap; gap: 1.4rem; justify-content: center;
+    margin-top: 2.8rem; position: relative; z-index: 1;
+  }
+  .stat-pill {
+    background: rgba(28,28,28,0.85); border-radius: 50px; padding: .55rem 1.2rem;
+    box-shadow: var(--shadow-md); display: flex; align-items: center; gap: .5rem;
+    font-size: .85rem; font-weight: 600; color: var(--cw-gray-300);
+    border: 1px solid rgba(163,230,53,0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .stat-pill .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-green { background: var(--cw-lime); }
+  .dot-blue { background: var(--cw-orange); }
+  .dot-teal { background: var(--cw-gray-400); }
+
+  /* ─── SECTION COMMONS ─── */
+  section { padding: 70px 1.5rem; }
+  .container { max-width: 900px; margin: 0 auto; }
+  .section-label {
+    display: inline-block; font-size: .72rem; font-weight: 800;
+    letter-spacing: .12em; text-transform: uppercase;
+    color: var(--cw-lime); margin-bottom: .6rem;
+  }
+  .section-title {
+    font-family: 'Inter', sans-serif; font-size: clamp(1.7rem, 4vw, 2.4rem);
+    line-height: 1.15; color: var(--cw-white); margin-bottom: .8rem;
+    font-weight: 800; letter-spacing: -0.02em;
+  }
+  .section-desc { color: var(--cw-gray-400); font-size: .97rem; max-width: 580px; }
+
+  /* ─── ABOUT ─── */
+  .about { background: var(--cw-dark); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; }
+  @media(max-width:600px){ .about-grid { grid-template-columns: 1fr; } }
+  .about-card {
+    background: var(--cw-gray-800);
+    border: 1.5px solid rgba(163,230,53,0.12);
+    border-radius: var(--radius-lg); padding: 1.6rem;
+    transition: transform .25s, box-shadow .25s;
+  }
+  .about-card:hover { transform: translateY(-4px); box-shadow: 0 10px 40px rgba(163,230,53,0.12); border-color: rgba(163,230,53,0.25); }
+  .about-icon { font-size: 2rem; margin-bottom: .8rem; }
+  .about-card h3 { font-size: 1rem; font-weight: 800; color: var(--cw-white); margin-bottom: .4rem; }
+  .about-card p { font-size: .9rem; color: var(--cw-gray-400); line-height: 1.6; }
+
+  /* ─── TIMELINE ─── */
+  .timeline-section { background: var(--cw-gray-900); }
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 2.4rem; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 22px; top: 30px; bottom: 30px;
+    width: 2px; background: linear-gradient(to bottom, var(--cw-lime), var(--cw-orange));
+    z-index: 0;
+  }
+  @media(min-width:600px){
+    .timeline { flex-direction: row; justify-content: space-between; }
+    .timeline::before { left: 0; right: 0; top: 22px; bottom: auto; width: auto; height: 2px;
+      background: linear-gradient(to right, var(--cw-lime), var(--cw-orange)); }
+  }
+  .tl-item {
+    display: flex; align-items: flex-start; gap: 1rem; position: relative; z-index: 1;
+    padding-bottom: 1.6rem;
+  }
+  @media(min-width:600px){
+    .tl-item { flex-direction: column; align-items: center; text-align: center; flex: 1; padding-bottom: 0; }
+  }
+  .tl-dot {
+    width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    box-shadow: var(--shadow-md); background: var(--cw-gray-800); border: 2px solid var(--cw-lime);
+  }
+  .tl-dot.blue { border-color: var(--cw-orange); }
+  .tl-dot.teal { border-color: var(--cw-gray-500); }
+  .tl-content h4 { font-weight: 800; font-size: .95rem; color: var(--cw-white); }
+  .tl-content p { font-size: .82rem; color: var(--cw-gray-500); margin-top: .15rem; }
+  .tl-note {
+    background: rgba(236,141,9,.12); border: 1.5px solid rgba(236,141,9,.35);
+    border-radius: var(--radius-md); padding: .9rem 1.2rem;
+    font-size: .88rem; color: var(--cw-orange); font-weight: 600; margin-top: 1.8rem;
+    display: flex; align-items: center; gap: .6rem;
+  }
+
+  /* ─── REWARD ─── */
+  .reward-section { background: var(--cw-dark); }
+  .reward-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 2rem; }
+  @media(max-width:620px){ .reward-grid { grid-template-columns: 1fr; } }
+  .reward-card {
+    border-radius: var(--radius-xl); padding: 1.8rem;
+    position: relative; overflow: hidden;
+    box-shadow: var(--shadow-md); transition: transform .25s, box-shadow .25s;
+    background: var(--cw-gray-800);
+    border: 1.5px solid rgba(163,230,53,0.1);
+  }
+  .reward-card:hover { transform: translateY(-5px); box-shadow: 0 10px 40px rgba(163,230,53,0.1); border-color: rgba(163,230,53,0.25); }
+  .reward-card.respondent { border-left: 4px solid var(--cw-lime); }
+  .reward-card.affiliate { border-left: 4px solid var(--cw-orange); }
+  .reward-card-header { display: flex; align-items: center; gap: .7rem; margin-bottom: 1rem; }
+  .reward-icon-wrap {
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 1.3rem;
+  }
+  .ri-green { background: linear-gradient(135deg, var(--cw-lime), #65a30d); }
+  .ri-blue { background: linear-gradient(135deg, var(--cw-orange), #c2410c); }
+  .reward-card h3 { font-weight: 800; font-size: 1rem; color: var(--cw-white); }
+  .reward-card .amount { font-family: 'Inter', sans-serif; font-size: 1.9rem; color: var(--cw-white); margin: .5rem 0; font-weight: 900; }
+  .reward-card .amount span { color: var(--cw-lime); }
+  .reward-card p { font-size: .87rem; color: var(--cw-gray-400); }
+
+  .bonus-list { margin-top: 1.2rem; display: flex; flex-direction: column; gap: .5rem; }
+  .bonus-item {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--cw-gray-900); border-radius: var(--radius-sm); padding: .6rem .9rem;
+    font-size: .84rem; box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .bonus-item .milestone { font-weight: 700; color: var(--cw-orange); }
+  .bonus-item .reward-val { font-weight: 800; color: var(--cw-lime); }
+  .bonus-item.special { background: linear-gradient(135deg, rgba(236,141,9,0.15), rgba(236,141,9,0.08)); border-color: rgba(236,141,9,0.25); }
+  .bonus-item.special .reward-val { color: var(--cw-orange); }
+
+  /* Progress bar */
+  .progress-wrapper { margin-top: 1.6rem; }
+  .progress-label { display: flex; justify-content: space-between; font-size: .78rem; font-weight: 700; color: var(--cw-gray-500); margin-bottom: .5rem; }
+  .progress-track { height: 12px; background: var(--cw-gray-700); border-radius: 50px; overflow: hidden; }
+  .progress-fill {
+    height: 100%; border-radius: 50px; width: 0;
+    background: linear-gradient(90deg, var(--cw-lime), var(--cw-orange));
+    background-size: 200% 100%;
+    transition: width 1.4s cubic-bezier(.4,0,.2,1);
+    animation: shimmer 2.5s linear infinite;
+  }
+  @keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
+  .progress-milestones { display: flex; justify-content: space-between; margin-top: .35rem; }
+  .pm { font-size: .68rem; color: var(--cw-gray-500); font-weight: 600; }
+
+  /* ─── HOW TO JOIN ─── */
+  .howto { background: var(--cw-gray-900); }
+  .steps { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+  .step {
+    display: flex; align-items: flex-start; gap: 1rem;
+    background: var(--cw-gray-800); border-radius: var(--radius-lg); padding: 1.2rem 1.4rem;
+    box-shadow: var(--shadow-sm); transition: transform .2s;
+    border: 1px solid rgba(163,230,53,0.08);
+  }
+  .step:hover { transform: translateX(4px); border-color: rgba(163,230,53,0.2); }
+  .step-num {
+    width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--cw-lime), var(--cw-lime-dark));
+    color: var(--cw-black); font-weight: 800; font-size: .9rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-body h4 { font-weight: 700; font-size: .95rem; color: var(--cw-white); margin-bottom: .2rem; }
+  .step-body p { font-size: .86rem; color: var(--cw-gray-400); }
+  .howto-note {
+    background: rgba(239,68,68,.08); border: 1.5px solid rgba(239,68,68,.3);
+    border-radius: var(--radius-md); padding: 1rem 1.2rem;
+    margin-top: 1.6rem; font-size: .87rem; color: #f87171; font-weight: 600;
+    display: flex; align-items: flex-start; gap: .6rem;
+  }
+
+  /* ─── DOMICILE ─── */
+  .domicile { background: var(--cw-dark); }
+  .province-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 2rem; }
+  @media(max-width:600px){ .province-wrapper { grid-template-columns: 1fr; } }
+  .province-card {
+    border-radius: var(--radius-lg); padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    background: var(--cw-gray-800);
+    border: 1.5px solid rgba(163,230,53,0.1);
+  }
+  .province-card.priority { border-left: 4px solid var(--cw-lime); }
+  .province-card.secondary { border-left: 4px solid var(--cw-orange); }
+  .province-card-header { display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; }
+  .province-card-header h3 { font-weight: 800; font-size: .95rem; color: var(--cw-white); }
+  .province-badge {
+    font-size: .65rem; font-weight: 800; padding: .2rem .55rem; border-radius: 50px;
+    text-transform: uppercase; letter-spacing: .05em;
+  }
+  .badge-priority { background: rgba(163,230,53,0.15); color: var(--cw-lime); }
+  .badge-secondary { background: rgba(236,141,9,0.15); color: var(--cw-orange); }
+  .province-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .ptag {
+    font-size: .74rem; font-weight: 600; padding: .28rem .7rem; border-radius: 50px;
+    background: var(--cw-gray-900); box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .ptag.p { color: var(--cw-lime); border-color: rgba(163,230,53,0.25); }
+  .ptag.s { color: var(--cw-orange); border-color: rgba(236,141,9,0.25); }
+  .domicile-rules {
+    background: var(--cw-gray-800); border-radius: var(--radius-lg);
+    padding: 1.2rem 1.5rem; margin-top: 1.4rem;
+    font-size: .87rem; color: var(--cw-gray-300); line-height: 1.7;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  .domicile-rules li { margin-left: 1.2rem; margin-bottom: .3rem; }
+  .domicile-note {
+    background: linear-gradient(135deg, rgba(163,230,53,.08), rgba(236,141,9,.06));
+    border: 1.5px solid rgba(163,230,53,.2); border-radius: var(--radius-md);
+    padding: .9rem 1.2rem; margin-top: 1.4rem;
+    font-size: .87rem; color: var(--cw-lime); font-weight: 600;
+  }
+
+  /* ─── CAPTION GEN ─── */
+  .captions { 
+    background: var(--cw-gray-900); 
+  }
+
+  .caption-grid { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1rem; 
+    margin-top: 2rem; 
+  }
+
+  .caption-card {
+    background: var(--cw-gray-800); 
+    border-radius: var(--radius-lg); 
+    padding: 1.3rem 1.5rem;
+    box-shadow: var(--shadow-md); 
+    transition: all .25s ease;
+    border: 1px solid rgba(163,230,53,0.08);
+  }
+
+  .caption-card:hover { 
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 40px rgba(163,230,53,0.08); 
+    border-color: rgba(163,230,53,0.2);
+  }
+
+  .caption-top { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    gap: 1rem; 
+  }
+
+  .caption-num { 
+    font-size: .7rem; 
+    font-weight: 800; 
+    color: var(--cw-gray-500); 
+    text-transform: uppercase; 
+    letter-spacing: .08em; 
+    margin-bottom: .4rem; 
+  }
+
+  /* 🔥 INI YANG PENTING BUAT ENTER */
+  .caption-text { 
+    font-size: .92rem; 
+    color: var(--cw-gray-300); 
+    line-height: 1.7; 
+    flex: 1;
+    white-space: pre-line;   /* ✅ biar enter kebaca */
+    word-break: break-word;  /* biar link panjang nggak keluar box */
+  }
+
+  .btn-copy {
+    flex-shrink: 0; 
+    padding: .55rem 1rem;
+    background: linear-gradient(135deg, var(--cw-lime), var(--cw-lime-dark));
+    color: var(--cw-black); 
+    font-size: .8rem; 
+    font-weight: 800; 
+    border: none;
+    border-radius: 50px; 
+    cursor: pointer; 
+    box-shadow: 0 2px 8px var(--cw-lime-glow);
+    transition: all .2s ease; 
+    white-space: nowrap;
+  }
+
+  .btn-copy:hover { 
+    transform: translateY(-1px); 
+    box-shadow: 0 4px 14px var(--cw-lime-glow); 
+  }
+
+  .btn-copy:active {
+    transform: scale(0.96);
+  }
+
+  .btn-copy.copied { 
+    background: linear-gradient(135deg, var(--cw-orange), #c2410c); 
+    box-shadow: 0 4px 14px var(--cw-orange-glow); 
+  }
+
+  /* ─── FINAL CTA ─── */
+  .cta {
+    background: linear-gradient(135deg, #111111, #1c1c1c);
+    text-align: center; padding: 70px 1.5rem;
+    position: relative; overflow: hidden;
+    border-top: 1px solid rgba(163,230,53,0.15);
+  }
+  .cta::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a3e635' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .cta h2 { font-family: 'Inter', sans-serif; font-size: clamp(1.8rem, 5vw, 3rem); color: white; margin-bottom: .8rem; position: relative; z-index: 1; font-weight: 900; letter-spacing: -0.02em; }
+  .cta p { color: rgba(255,255,255,.7); font-size: 1rem; margin-bottom: 2rem; position: relative; z-index: 1; }
+  .cta-buttons { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; position: relative; z-index: 1; }
+  .btn-cta-white {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: var(--cw-lime); color: var(--cw-black); font-weight: 800; font-size: .95rem;
+    padding: .8rem 1.8rem; border-radius: 50px;
+    text-decoration: none; box-shadow: 0 4px 20px var(--cw-lime-glow);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn-cta-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px var(--cw-lime-glow); }
+  .btn-cta-outline {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: transparent; color: white; font-weight: 700; font-size: .95rem;
+    padding: .8rem 1.8rem; border-radius: 50px; border: 2px solid rgba(255,255,255,.3);
+    text-decoration: none; transition: background .2s, border-color .2s;
+  }
+  .btn-cta-outline:hover { background: rgba(163,230,53,0.1); border-color: var(--cw-lime); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--cw-black); text-align: center; padding: 2.5rem 1.5rem;
+    color: var(--cw-gray-500); font-size: .88rem;
+    border-top: 1px solid rgba(163,230,53,0.1);
+  }
+  footer strong { color: var(--cw-lime); }
+
+  /* ─── FADE IN ANIMATION ─── */
+  .fade-in { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── TOAST ─── */
+  #toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--cw-gray-800); color: var(--cw-lime); font-size: .88rem; font-weight: 800;
+    padding: .7rem 1.5rem; border-radius: 50px; box-shadow: 0 8px 30px rgba(0,0,0,.4);
+    opacity: 0; transition: opacity .3s, transform .3s; z-index: 1000; pointer-events: none;
+    border: 1px solid rgba(163,230,53,0.2);
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ─── POSTER MODAL ─── */
+  .poster-modal {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .3s ease;
+  }
+  .poster-modal.active { opacity: 1; pointer-events: auto; }
+  .poster-modal-content {
+    background: var(--cw-gray-800);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    max-width: 420px; width: 90%;
+    border: 1px solid rgba(163,230,53,0.15);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    transform: translateY(20px) scale(0.96);
+    transition: transform .3s ease;
+  }
+  .poster-modal.active .poster-modal-content { transform: translateY(0) scale(1); }
+  .poster-modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1rem;
+  }
+  .poster-modal-header h3 {
+    font-size: 1rem; font-weight: 800; color: var(--cw-white);
+  }
+  .poster-modal-close {
+    background: none; border: none; color: var(--cw-gray-400);
+    font-size: 1.5rem; cursor: pointer; line-height: 1;
+    transition: color .2s; padding: 0; width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+  }
+  .poster-modal-close:hover { color: var(--cw-white); background: rgba(255,255,255,0.08); }
+  .poster-modal-img {
+    width: 100%; border-radius: var(--radius-sm);
+    border: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 1rem;
+  }
+  .poster-modal-download {
+    display: block; width: 100%; text-align: center;
+    background: linear-gradient(135deg, var(--cw-lime), var(--cw-lime-dark));
+    color: var(--cw-black); font-weight: 800; font-size: .95rem;
+    padding: .8rem; border-radius: 50px; text-decoration: none;
+    box-shadow: 0 4px 14px var(--cw-lime-glow);
+    transition: transform .2s, box-shadow .2s; border: none; cursor: pointer;
+  }
+  .poster-modal-download:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--cw-lime-glow); }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--cw-gray-900); }
+  ::-webkit-scrollbar-thumb { background: var(--cw-lime); border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<!-- POSTER MODAL -->
+<div class="poster-modal" id="posterModal" onclick="closePosterModal(event)">
+  <div class="poster-modal-content" onclick="event.stopPropagation()">
+    <div class="poster-modal-header">
+      <h3>🖼 Poster Call For Respondent</h3>
+      <button class="poster-modal-close" onclick="closePosterModal()">&times;</button>
+    </div>
+    <img class="poster-modal-img" src="Poster Call For Respondent CW - Niko Fauza.png" alt="Poster Call For Respondent" />
+    <button class="poster-modal-download" onclick="forceDownloadPoster()">
+      ⬇ Download Now
+    </button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast">✅ Caption berhasil disalin!</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-logo">Referral<span>Program</span><div class="nav-dot"></div></div>
+  <div class="nav-right">
+    <button class="btn-poster" onclick="openPosterModal()">
+      <span>⬇</span> Download Poster
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+  <div class="hero-badge">🎓 Program Penelitian &amp; Referral</div>
+  <h1>Dapat Uang dari<br><span>Isi &amp; Sebar Kuesioner!</span></h1>
+  <p class="hero-sub">Ikuti Referral Program by Niko dan dapatkan reward hingga puluhan ribu + hadiah menarik 🎁</p>
+  <div class="hero-buttons">
+    <a href="https://forms.gle/1NUWMopqrGJH3qSRA" class="btn-primary">📋 Isi Kuesioner</a>
+    <a href="#cara-ikut" class="btn-secondary">🚀 Mulai Jadi Affiliate</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-pill"><span class="dot dot-green"></span> Program aktif</div>
+    <div class="stat-pill"><span class="dot dot-blue"></span> Deadline 30 April</div>
+    <div class="stat-pill"><span class="dot dot-teal"></span> Terbuka seluruh Indonesia</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about fade-in" id="tentang">
+  <div class="container">
+    <span class="section-label">📖 Tentang Program</span>
+    <h2 class="section-title">Apa Itu Referral Program by Niko?</h2>
+    <p class="section-desc">Sebuah program kuesioner penelitian di mana kamu bisa berpartisipasi sebagai responden, affiliate, atau keduanya!</p>
+    <div class="about-grid">
+      <div class="about-card">
+        <div class="about-icon">📝</div>
+        <h3>Responden</h3>
+        <p>Isi kuesioner singkat (~3 menit) dan dapatkan kesempatan memenangkan hadiah uang tunai. Mudah, cepat, dan berkontribusi untuk penelitian nyata.</p>
+      </div>
+      <div class="about-card">
+        <div class="about-icon">🔗</div>
+        <h3>Affiliate</h3>
+        <p>Ajak teman-temanmu untuk ikut mengisi kuesioner. Setiap orang yang kamu ajak = Rp1.000, plus bonus bertingkat yang makin besar!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section fade-in" id="timeline">
+  <div class="container">
+    <span class="section-label">📅 Jadwal Program</span>
+    <h2 class="section-title">Timeline Program</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">🚀</div>
+        <div class="tl-content">
+          <h4>24 April</h4>
+          <p>Program dimulai</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot blue">⏰</div>
+        <div class="tl-content">
+          <h4>30 April</h4>
+          <p>Penutupan (23:59)</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot teal">✅</div>
+        <div class="tl-content">
+          <h4>1–3 Mei</h4>
+          <p>Validasi &amp; Pembayaran</p>
+        </div>
+      </div>
+    </div>
+    <div class="tl-note">
+      ⚠️ <span>Semua reward dihitung setelah program ditutup pada 30 April pukul 23:59</span>
+    </div>
+  </div>
+</section>
+
+<!-- REWARD -->
+<section class="reward-section fade-in" id="reward">
+  <div class="container">
+    <span class="section-label">🎁 Reward</span>
+    <h2 class="section-title">Berapa yang Bisa Kamu Dapatkan?</h2>
+    <p class="section-desc">Dua jalur reward — pilih satu atau jalankan keduanya!</p>
+    <div class="reward-grid">
+      <!-- Respondent card -->
+      <div class="reward-card respondent">
+        <div class="reward-card-header">
+          <div class="reward-icon-wrap ri-green">📋</div>
+          <h3>Responden</h3>
+        </div>
+        <div class="amount"><span>Rp200.000</span></div>
+        <p>Untuk <strong>4 pemenang terpilih</strong>. Semua peserta yang mengisi kuesioner dengan valid otomatis masuk undian.</p>
+        <div style="margin-top:1.2rem;background:var(--cw-gray-900);border-radius:10px;padding:.9rem;font-size:.84rem;color:var(--cw-gray-400);box-shadow:var(--shadow-sm);border:1px solid rgba(163,230,53,0.1);">
+          🎲 Hadiah diundi setelah program selesai. Isi kuesioner dengan jujur dan lengkap untuk menjaga validitas data.
+        </div>
+      </div>
+
+      <!-- Affiliate card -->
+      <div class="reward-card affiliate">
+        <div class="reward-card-header">
+          <div class="reward-icon-wrap ri-blue">🔗</div>
+          <h3>Affiliate</h3>
+        </div>
+        <div class="amount"><span style="color:var(--blue-600)">Rp1.000</span></div>
+        <p>Per 1 responden valid yang kamu ajak. Plus <strong>bonus checkpoint</strong> berikut:</p>
+        <div class="bonus-list">
+          <div class="bonus-item"><span class="milestone">10 orang</span><span class="reward-val">+Rp3.000</span></div>
+          <div class="bonus-item"><span class="milestone">20 orang</span><span class="reward-val">+Rp5.000</span></div>
+          <div class="bonus-item"><span class="milestone">30 orang</span><span class="reward-val">+Rp10.000</span></div>
+          <div class="bonus-item"><span class="milestone">50 orang</span><span class="reward-val">+Rp20.000</span></div>
+          <div class="bonus-item special"><span class="milestone">🏆 80 orang</span><span class="reward-val">Tumbler + Rp30.000</span></div>
+        </div>
+        <div class="progress-wrapper">
+          <div class="progress-label"><span>0 orang</span><span>🎯 80 orang</span></div>
+          <div class="progress-track"><div class="progress-fill" id="progBar"></div></div>
+          <div class="progress-milestones">
+            <span class="pm">10</span><span class="pm">20</span><span class="pm">30</span><span class="pm">50</span><span class="pm">80</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO JOIN -->
+<section class="howto fade-in" id="cara-ikut">
+  <div class="container">
+    <span class="section-label">📌 Cara Ikut</span>
+    <h2 class="section-title">Langkah-Langkah Bergabung</h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><h4>Isi Kuesioner</h4><p>Klik link kuesioner dan isi dengan lengkap & jujur. Hanya butuh sekitar 3 menit.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><h4>Ajak Teman untuk Ikut</h4><p>Bagikan link kuesioner ke teman, keluarga, atau komunitasmu. Gunakan caption yang sudah tersedia di bawah!</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><h4>Catat Siapa yang Kamu Ajak</h4><p>Simpan nama lengkap dan tanggal mereka mengisi kuesioner. Ini penting untuk klaim reward.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><h4>Kirim Data ke Niko via DM</h4><p>Setelah deadline, kirim data (nama + tanggal) ke Niko lewat WhatsApp atau Instagram.</p></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><h4>Reward Dihitung Setelah Deadline</h4><p>Validasi dilakukan manual oleh Niko. Reward ditransfer 1–3 Mei setelah verifikasi selesai.</p></div></div>
+    </div>
+    <div class="howto-note">
+      ⚠️ <span><strong>Penting:</strong> Data harus valid. Tidak boleh asal isi. Setiap klaim akan dicek manual — data tidak valid tidak akan dihitung.</span>
+    </div>
+  </div>
+</section>
+
+<!-- DOMICILE -->
+<section class="domicile fade-in" id="domisili">
+  <div class="container">
+    <span class="section-label">📍 Domisili</span>
+    <h2 class="section-title">Ketentuan Domisili Responden</h2>
+    <div class="domicile-rules">
+      <ul>
+        <li>Domisili harus sesuai <strong>tempat tinggal asli saat ini</strong></li>
+        <li>Tidak boleh mengisi provinsi secara asal atau bohong</li>
+        <li>Data tidak valid <strong>tidak akan dihitung</strong></li>
+      </ul>
+    </div>
+    <div class="province-wrapper">
+      <div class="province-card priority">
+        <div class="province-card-header">
+          <h3>🔥 Sangat Diutamakan</h3>
+          <span class="province-badge badge-priority">Prioritas</span>
+        </div>
+        <div class="province-tags">
+          <span class="ptag p">Sumatera Selatan</span>
+          <span class="ptag p">Bengkulu</span>
+          <span class="ptag p">Bangka Belitung</span>
+          <span class="ptag p">Kalimantan Tengah</span>
+          <span class="ptag p">Kalimantan Selatan</span>
+          <span class="ptag p">Kalimantan Timur</span>
+          <span class="ptag p">Kalimantan Utara</span>
+          <span class="ptag p">Sulawesi Utara</span>
+          <span class="ptag p">Sulawesi Tengah</span>
+          <span class="ptag p">Sulawesi Tenggara</span>
+          <span class="ptag p">Gorontalo</span>
+          <span class="ptag p">Sulawesi Barat</span>
+          <span class="ptag p">NTB</span>
+          <span class="ptag p">NTT</span>
+          <span class="ptag p">Maluku</span>
+          <span class="ptag p">Maluku Utara</span>
+          <span class="ptag p">Papua</span>
+          <span class="ptag p">Papua Tengah</span>
+          <span class="ptag p">Papua Pegunungan</span>
+          <span class="ptag p">Papua Selatan</span>
+          <span class="ptag p">Papua Barat Daya</span>
+        </div>
+      </div>
+      <div class="province-card secondary">
+        <div class="province-card-header">
+          <h3>🔵 Data Masih Sedikit</h3>
+          <span class="province-badge badge-secondary">&lt;5 Responden</span>
+        </div>
+        <div class="province-tags">
+          <span class="ptag s">DI Yogyakarta</span>
+          <span class="ptag s">Lampung</span>
+          <span class="ptag s">Kalimantan Barat</span>
+          <span class="ptag s">Aceh</span>
+          <span class="ptag s">Papua Barat</span>
+          <span class="ptag s">Jambi</span>
+          <span class="ptag s">Riau</span>
+          <span class="ptag s">Sulawesi Selatan</span>
+          <span class="ptag s">Bali</span>
+          <span class="ptag s">Banten</span>
+          <span class="ptag s">Sumatera Barat</span>
+        </div>
+      </div>
+    </div>
+    <div class="domicile-note">
+      🌍 Program terbuka untuk seluruh Indonesia, namun provinsi di atas sangat diutamakan karena masih kekurangan data.
+    </div>
+  </div>
+</section>
+
+<!-- CAPTION GENERATOR -->
+<section class="captions fade-in" id="caption">
+  <div class="container">
+    <span class="section-label">✍️ Caption Siap Pakai</span>
+    <h2 class="section-title">Caption Generator</h2>
+    <p class="section-desc">Salin dan sebarkan! Caption sudah siap pakai 👇</p>
+
+    <div class="caption-grid">
+
+      <!-- CAPTION 1 -->
+      <div class="caption-card">
+        <div class="caption-top">
+          <div>
+            <div class="caption-num">Caption 1 · Personal</div>
+            <div class="caption-text" id="cap1">Lagi butuh bantuan nih 🙏
+Isi kuesioner ±3 menit + bisa dapet reward!
+
+Ini tentang aplikasi CryptoWave (platform edukasi crypto & AI, bukan untuk trading).
+
+Kalau kamu pernah coba atau sekadar explore bentar, boleh banget isi sesuai pengalaman kamu ya 🙌
+
+Link: https://forms.gle/1NUWMopqrGJH3qSRA
+
+Makasih banyak ya ✨</div>
+          </div>
+          <button class="btn-copy" onclick="copyCaption('cap1', this)">📋 Salin</button>
+        </div>
+      </div>
+
+      <!-- CAPTION 2 -->
+      <div class="caption-card">
+        <div class="caption-top">
+          <div>
+            <div class="caption-num">Caption 2 · Affiliate</div>
+            <div class="caption-text" id="cap2">Ikut bantu sebarkan kuesioner ini yuk! 🙌
+
+Setiap 1 orang yang kamu ajak = Rp1.000 + bonus sampai puluhan ribu 🎉
+
+Caranya gampang:
+* Ajak teman isi kuesioner
+* Catat siapa saja yang kamu ajak (nama + tanggal)
+* Klaim ke Niko setelah deadline
+
+Reward sampai 🎁 Tumbler + uang tambahan!
+
+Link: https://forms.gle/1NUWMopqrGJH3qSRA
+
+Gas bantuin sambil dapet reward 🚀</div>
+          </div>
+          <button class="btn-copy" onclick="copyCaption('cap2', this)">📋 Salin</button>
+        </div>
+      </div>
+
+      <!-- CAPTION 3 -->
+      <div class="caption-card">
+        <div class="caption-top">
+          <div>
+            <div class="caption-num">Caption 3 · Giveaway</div>
+            <div class="caption-text" id="cap3">Ada giveaway Rp200.000 untuk 4 orang terpilih! 🔥
+
+Cukup isi kuesioner singkat (±3 menit)
+Deadline: 30 April
+
+Syarat:
+* Isi sesuai pengalaman (tidak asal)
+* Pernah coba / eksplor CryptoWave
+
+Link: https://forms.gle/1NUWMopqrGJH3qSRA
+
+Jangan sampai kelewat ⏳</div>
+          </div>
+          <button class="btn-copy" onclick="copyCaption('cap3', this)">📋 Salin</button>
+        </div>
+      </div>
+
+      <!-- CAPTION 4 -->
+      <div class="caption-card">
+        <div class="caption-top">
+          <div>
+            <div class="caption-num">Caption 4 · Penjelasan</div>
+            <div class="caption-text" id="cap4">✍️ Penjelasan CryptoWave (Versi Lengkap & Netral)
+
+Saat ini sedang dibutuhkan feedback dari pengguna aplikasi CryptoWave.
+Aplikasi ini masih tergolong baru dan berfokus pada edukasi crypto serta teknologi terbaru seperti AI (bukan untuk jual beli / trading).
+
+Di dalamnya tersedia:
+* 📰 News seputar crypto & teknologi
+* 📊 Research dan insight
+* 🎓 Course pembelajaran (gratis)
+
+Kalau belum pernah pakai, bisa coba dulu.
+Aplikasinya tersedia di App Store & Play Store, cukup cari “CryptoWave”, dan login bisa langsung pakai Google.
+
+Kontennya cukup lengkap dan up to date,
+mirip platform belajar berbayar tapi bisa diakses gratis.
+
+Setelah mencoba atau jika sudah pernah menggunakan,
+boleh bantu isi kuesioner singkat (±3 menit) sesuai pengalaman masing-masing 🙏
+
+👉 https://forms.gle/1NUWMopqrGJH3qSRA
+
+Terima kasih banyak atas partisipasinya ✨</div>
+          </div>
+          <button class="btn-copy" onclick="copyCaption('cap4', this)">📋 Salin</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta fade-in" id="mulai">
+  <div class="container">
+    <h2>Yuk Mulai Sekarang! 🚀</h2>
+    <p>Semakin cepat kamu mulai, semakin besar peluang dapat reward 🚀</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn-cta-white">📋 Isi Kuesioner</a>
+      <a href="instagram://user?username=niko_f_k" class="btn-cta-outline" onclick="fallbackInstagram(event)">💬 Hubungi Niko</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Terima kasih atas partisipasimu 🙏</p>
+  <p style="margin-top:.4rem">— <strong>Niko</strong></p>
+</footer>
+
+<script>
+  // Poster modal
+  function openPosterModal() {
+    document.getElementById('posterModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closePosterModal(e) {
+    if (!e || e.target === document.getElementById('posterModal') || e.target.closest('.poster-modal-close')) {
+      document.getElementById('posterModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  // Force download poster via Blob (works on file:// too)
+  function forceDownloadPoster() {
+    const fileName = 'Poster-Call-For-Respondent-CW-Niko-Fauza.png';
+    const filePath = 'Poster Call For Respondent CW - Niko Fauza.png';
+    fetch(filePath)
+      .then(res => res.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      })
+      .catch(() => {
+        // Fallback: open in new tab if fetch fails
+        window.open(filePath, '_blank');
+      });
+  }
+
+  // Instagram deep link with fallback
+  function fallbackInstagram(e) {
+    const now = Date.now();
+    const timeout = setTimeout(() => {
+      if (Date.now() - now < 1500) {
+        window.location.href = 'https://www.instagram.com/niko_f_k';
+      }
+    }, 800);
+    window.addEventListener('blur', () => clearTimeout(timeout), { once: true });
+  }
+
+  // Parallax hero background
+  const heroBg = document.querySelector('.hero-bg');
+  window.addEventListener('scroll', () => {
+    if (heroBg) {
+      const y = window.scrollY * 0.35;
+      heroBg.style.transform = `translateY(${y}px) scale(1.1)`;
+    }
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // Fade in on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Animate progress bar when visible
+  const progBar = document.getElementById('progBar');
+  const progObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { progBar.style.width = '42%'; progObserver.disconnect(); }
+  }, { threshold: 0.3 });
+  progObserver.observe(progBar);
+
+  // Copy caption
+  function copyCaption(id, btn) {
+    const text = document.getElementById(id).innerText;
+
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✅ Disalin!';
+      btn.classList.add('copied');
+      showToast();
+
+      setTimeout(() => {
+        btn.textContent = '📋 Salin';
+        btn.classList.remove('copied');
+      }, 2000);
+
+    }).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = 0;
+
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+
+      btn.textContent = '✅ Disalin!';
+      btn.classList.add('copied');
+      showToast();
+
+      setTimeout(() => {
+        btn.textContent = '📋 Salin';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  function showToast() {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2400);
+  }
+</script>
+</body>
+</html>
